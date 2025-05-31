@@ -20,6 +20,7 @@ class CVListView(generic.ListView):
     model = CV
     template_name = "main/index.html"
     context_object_name = "cvs"
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = CV.objects.prefetch_related("skills", "projects", "contacts")
