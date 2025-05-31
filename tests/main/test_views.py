@@ -1,6 +1,5 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from main.models import CV, Skill, Project, Contact
 from datetime import date
 
