@@ -3,14 +3,19 @@
 {% block title %}CVs list{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">CVs list</h1>
-<div class="row">
-    {% for cv in cvs %}
-    <div class="col-md-6 mb-4">
+<div class="container mt-4">
+  <h1 class="mb-4">CVs list</h1>
+  {% for cv in cvs %}
+  <div class="mb-4">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{ cv.first_name }} {{ cv.last_name }}</h5>
+                <h5 class="card-title">
+                    <a href="{% url 'main:cv_detail' cv.pk %}" class="text-decoration-none text-dark name-link">
+                          {{ cv.first_name }} {{ cv.last_name }}
+                    </a>
+                </h5>
                 <p class="card-text">{{ cv.bio|truncatewords:30 }}</p>
+                <a href="{% url 'main:cv_detail' cv.pk %}" class="btn btn-primary">View Details</a>
 
                 <h6 class="mt-3">Skills:</h6>
                 <div class="mb-3">
@@ -38,6 +43,6 @@
             </div>
         </div>
     </div>
-    {% endfor %}
+  {% endfor %}
 </div>
 {% endblock %}
