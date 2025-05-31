@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ cv.first_name }} {{ cv.last_name }}`s CV Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title mb-4">{{ cv.first_name }} {{ cv.last_name }}</h1>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>About</h3>
+                    <p class="mb-4">{{ cv.bio }}</p>
+
+                    <h3>Skills</h3>
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        {% for skill in skills %}
+                            <span class="badge bg-primary p-2">
+                                {{ skill.name }} ({{ skill.level }})
+                            </span>
+                        {% endfor %}
+                    </div>
+
+                    <h3>Projects</h3>
+                    <div class="list-group mb-4">
+                        {% for project in projects %}
+                            <div class="list-group-item">
+                                <h5 class="mb-1">{{ project.name }}</h5>
+                                <p class="mb-2">{{ project.description }}</p>
+                                <p class="mb-2"><strong>Technologies:</strong> {{ project.technologies }}</p>
+                                <p class="mb-0">
+                                    <strong>Period:</strong>
+                                    {{ project.start_date|date:"d.m.Y" }} -
+                                    {% if project.end_date %}
+                                        {{ project.end_date|date:"d.m.Y" }}
+                                    {% else %}
+                                        Present
+                                    {% endif %}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title h5 mb-0">Contacts</h3>
+                        </div>
+                        <div class="card-body">
+                            {% for contact in contacts %}
+                                <p class="mb-2">
+                                    <strong>{{ contact.type }}:</strong> {{ contact.value }}
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
