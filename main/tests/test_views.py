@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import CV, Skill, Project, Contact
+from rest_framework.test import APITestCase
+from main.models import CV, Skill, Project, Contact
 from datetime import date
 
 CV_LIST_URL = reverse("main:cv_list")
