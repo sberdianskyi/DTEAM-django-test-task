@@ -5,19 +5,19 @@ from .models import CV, Skill, Project, Contact
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ("name", "level")
+        fields = ("id", "name", "level")
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ("name", "description", "technologies", "start_date", "end_date")
+        fields = ("id", "name", "description", "technologies", "start_date", "end_date")
 
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = ("type", "value")
+        fields = ("id", "type", "value")
 
 
 class CVSerializer(serializers.ModelSerializer):
