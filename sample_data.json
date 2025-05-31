@@ -1,59 +1,563 @@
 [
-  {
-    "model": "main.cv",
-    "pk": 1,
-    "fields": {
-      "first_name": "John",
-      "last_name": "Doe",
-      "bio": "Experienced software developer with a passion for building scalable web applications. Specializing in Python and Django development with 5 years of industry experience."
-    }
-  },
-  {
-    "model": "main.skill",
-    "pk": 1,
-    "fields": {
-      "cv": 1,
-      "name": "Python",
-      "level": "Expert"
-    }
-  },
-  {
-    "model": "main.skill",
-    "pk": 2,
-    "fields": {
-      "cv": 1,
-      "name": "Django",
-      "level": "Intermediate"
-    }
-  },
-  {
-    "model": "main.project",
-    "pk": 1,
-    "fields": {
-      "cv": 1,
-      "name": "E-commerce Platform",
-      "description": "Built a scalable e-commerce platform",
-      "technologies": "Python, Django, PostgreSQL",
-      "start_date": "2023-01-01",
-      "end_date": "2023-06-30"
-    }
-  },
-  {
-    "model": "main.contact",
-    "pk": 1,
-    "fields": {
-      "cv": 1,
-      "type": "Email",
-      "value": "john.doe@example.com"
-    }
-  },
-  {
-    "model": "main.contact",
-    "pk": 2,
-    "fields": {
-      "cv": 1,
-      "type": "LinkedIn",
-      "value": "linkedin.com/in/johndoe"
-    }
+{
+  "model": "main.cv",
+  "pk": 1,
+  "fields": {
+    "first_name": "John",
+    "last_name": "Doe",
+    "bio": "Experienced software developer with a passion for building scalable web applications. Specializing in Python and Django development with 5 years of industry experience."
   }
+},
+{
+  "model": "main.cv",
+  "pk": 2,
+  "fields": {
+    "first_name": "Serhii",
+    "last_name": "Berdianskyi",
+    "bio": "Experienced Python Developer with strong focus on Django and web development. Passionate about clean code and efficient solutions."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 1,
+  "fields": {
+    "cv": 1,
+    "name": "Python",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 2,
+  "fields": {
+    "cv": 1,
+    "name": "Django",
+    "level": "Intermediate"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 3,
+  "fields": {
+    "cv": 2,
+    "name": "Python",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 4,
+  "fields": {
+    "cv": 2,
+    "name": "Django",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 5,
+  "fields": {
+    "cv": 2,
+    "name": "REST API",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 6,
+  "fields": {
+    "cv": 2,
+    "name": "PostgreSQL",
+    "level": "Intermediate"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 7,
+  "fields": {
+    "cv": 2,
+    "name": "Docker",
+    "level": "Intermediate"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 1,
+  "fields": {
+    "cv": 1,
+    "name": "E-commerce Platform",
+    "description": "Built a scalable e-commerce platform",
+    "technologies": "Python, Django, PostgreSQL",
+    "start_date": "2023-01-01",
+    "end_date": "2023-06-30"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 2,
+  "fields": {
+    "cv": 2,
+    "name": "CV Management System",
+    "description": "Django-based CV management system with REST API and PDF export",
+    "technologies": "Python, Django, DRF, WeasyPrint",
+    "start_date": "2022-02-02",
+    "end_date": null
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 1,
+  "fields": {
+    "cv": 1,
+    "type": "Email",
+    "value": "john.doe@example.com"
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 2,
+  "fields": {
+    "cv": 1,
+    "type": "LinkedIn",
+    "value": "linkedin.com/in/johndoe"
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 3,
+  "fields": {
+    "cv": 2,
+    "type": "Email",
+    "value": "serhii.berdianskyi@example.com"
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 4,
+  "fields": {
+    "cv": 2,
+    "type": "LinkedIn",
+    "value": "linkedin.com/in/serhii-berdianskyi"
+  }
+},
+ {
+  "model": "main.cv",
+  "pk": 3,
+  "fields": {
+    "first_name": "Emma",
+    "last_name": "Wilson",
+    "bio": "Full-stack developer with strong expertise in modern web technologies and cloud solutions. Passionate about creating user-friendly applications."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 8,
+  "fields": {
+    "cv": 3,
+    "name": "JavaScript",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 9,
+  "fields": {
+    "cv": 3,
+    "name": "React",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 10,
+  "fields": {
+    "cv": 3,
+    "name": "Node.js",
+    "level": "Intermediate"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 3,
+  "fields": {
+    "cv": 3,
+    "name": "Social Media Dashboard",
+    "description": "Analytics dashboard for social media management",
+    "technologies": "React, Node.js, MongoDB",
+    "start_date": "2023-03-15",
+    "end_date": "2023-12-31"
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 5,
+  "fields": {
+    "cv": 3,
+    "type": "Email",
+    "value": "emma.wilson@example.com"
+  }
+},
+{
+  "model": "main.cv",
+  "pk": 4,
+  "fields": {
+    "first_name": "Michael",
+    "last_name": "Chen",
+    "bio": "DevOps engineer specializing in cloud infrastructure and automation. Experience with AWS and containerization technologies."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 11,
+  "fields": {
+    "cv": 4,
+    "name": "AWS",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 12,
+  "fields": {
+    "cv": 4,
+    "name": "Docker",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 13,
+  "fields": {
+    "cv": 4,
+    "name": "Kubernetes",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 4,
+  "fields": {
+    "cv": 4,
+    "name": "Cloud Migration Project",
+    "description": "Led migration of legacy systems to AWS cloud",
+    "technologies": "AWS, Docker, Terraform",
+    "start_date": "2023-06-01",
+    "end_date": null
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 6,
+  "fields": {
+    "cv": 4,
+    "type": "Email",
+    "value": "michael.chen@example.com"
+  }
+},
+{
+  "model": "main.cv",
+  "pk": 5,
+  "fields": {
+    "first_name": "Sofia",
+    "last_name": "Garcia",
+    "bio": "Data scientist with focus on machine learning and AI applications. Experience in building predictive models and data analysis."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 14,
+  "fields": {
+    "cv": 5,
+    "name": "Python",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 15,
+  "fields": {
+    "cv": 5,
+    "name": "Machine Learning",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 16,
+  "fields": {
+    "cv": 5,
+    "name": "TensorFlow",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 5,
+  "fields": {
+    "cv": 5,
+    "name": "Predictive Analytics System",
+    "description": "Built ML models for customer behavior prediction",
+    "technologies": "Python, TensorFlow, Scikit-learn",
+    "start_date": "2023-04-15",
+    "end_date": "2023-11-30"
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 7,
+  "fields": {
+    "cv": 5,
+    "type": "Email",
+    "value": "sofia.garcia@example.com"
+  }
+},
+{
+  "model": "main.cv",
+  "pk": 6,
+  "fields": {
+    "first_name": "Alex",
+    "last_name": "Taylor",
+    "bio": "Mobile app developer with expertise in cross-platform development. Passionate about creating seamless mobile experiences."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 17,
+  "fields": {
+    "cv": 6,
+    "name": "React Native",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 18,
+  "fields": {
+    "cv": 6,
+    "name": "TypeScript",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 6,
+  "fields": {
+    "cv": 6,
+    "name": "Health Tracking App",
+    "description": "Cross-platform mobile app for health monitoring",
+    "technologies": "React Native, TypeScript, Firebase",
+    "start_date": "2023-07-01",
+    "end_date": "2024-01-15"
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 8,
+  "fields": {
+    "cv": 6,
+    "type": "Email",
+    "value": "alex.taylor@example.com"
+  }
+},
+{
+  "model": "main.cv",
+  "pk": 7,
+  "fields": {
+    "first_name": "Laura",
+    "last_name": "Miller",
+    "bio": "Backend developer specializing in microservices architecture and distributed systems. Strong focus on scalable solutions."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 19,
+  "fields": {
+    "cv": 7,
+    "name": "Java",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 20,
+  "fields": {
+    "cv": 7,
+    "name": "Spring Boot",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 21,
+  "fields": {
+    "cv": 7,
+    "name": "Microservices",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 7,
+  "fields": {
+    "cv": 7,
+    "name": "Payment Processing System",
+    "description": "Microservices-based payment processing platform",
+    "technologies": "Java, Spring Boot, Kafka",
+    "start_date": "2023-02-01",
+    "end_date": null
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 9,
+  "fields": {
+    "cv": 7,
+    "type": "Email",
+    "value": "laura.miller@example.com"
+  }
+},
+{
+  "model": "main.cv",
+  "pk": 8,
+  "fields": {
+    "first_name": "David",
+    "last_name": "Kim",
+    "bio": "Security specialist with focus on application security and penetration testing. Experienced in implementing secure development practices."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 22,
+  "fields": {
+    "cv": 8,
+    "name": "Security Testing",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 23,
+  "fields": {
+    "cv": 8,
+    "name": "Python",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 8,
+  "fields": {
+    "cv": 8,
+    "name": "Security Audit Platform",
+    "description": "Automated security testing and reporting system",
+    "technologies": "Python, Docker, Security Tools",
+    "start_date": "2023-05-15",
+    "end_date": "2024-02-28"
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 10,
+  "fields": {
+    "cv": 8,
+    "type": "Email",
+    "value": "david.kim@example.com"
+  }
+},
+{
+  "model": "main.cv",
+  "pk": 9,
+  "fields": {
+    "first_name": "Anna",
+    "last_name": "Brown",
+    "bio": "UI/UX designer with strong frontend development skills. Focused on creating beautiful and functional web interfaces."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 24,
+  "fields": {
+    "cv": 9,
+    "name": "UI Design",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 25,
+  "fields": {
+    "cv": 9,
+    "name": "React",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 9,
+  "fields": {
+    "cv": 9,
+    "name": "Design System",
+    "description": "Component library and design system for enterprise applications",
+    "technologies": "React, Storybook, Figma",
+    "start_date": "2023-08-01",
+    "end_date": null
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 11,
+  "fields": {
+    "cv": 9,
+    "type": "Email",
+    "value": "anna.brown@example.com"
+  }
+},
+{
+  "model": "main.cv",
+  "pk": 10,
+  "fields": {
+    "first_name": "James",
+    "last_name": "Wilson",
+    "bio": "Quality Assurance engineer specializing in test automation and CI/CD implementation. Experience with various testing frameworks."
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 26,
+  "fields": {
+    "cv": 10,
+    "name": "Test Automation",
+    "level": "Expert"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 27,
+  "fields": {
+    "cv": 10,
+    "name": "CI/CD",
+    "level": "Advanced"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 10,
+  "fields": {
+    "cv": 10,
+    "name": "Test Automation Framework",
+    "description": "End-to-end test automation framework for web applications",
+    "technologies": "Python, Selenium, Jenkins",
+    "start_date": "2023-09-01",
+    "end_date": "2024-03-31"
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 12,
+  "fields": {
+    "cv": 10,
+    "type": "Email",
+    "value": "james.wilson@example.com"
+  }
+}
 ]
