@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}CVs list{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">CVs list</h1>
+<div class="row">
+    {% for cv in cvs %}
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ cv.first_name }} {{ cv.last_name }}</h5>
+                <p class="card-text">{{ cv.bio|truncatewords:30 }}</p>
+
+                <h6 class="mt-3">Skills:</h6>
+                <div class="mb-3">
+                    {% for skill in cv.skills.all %}
+                    <span class="badge bg-primary me-1">{{ skill.name }} ({{ skill.level }})</span>
+                    {% endfor %}
+                </div>
+
+                <h6>Projects:</h6>
+                <ul class="list-unstyled">
+                    {% for project in cv.projects.all %}
+                    <li class="mb-2">
+                        <strong>{{ project.name }}</strong><br>
+                        <small class="text-muted">{{ project.technologies }}</small>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <h6>Contacts:</h6>
+                <ul class="list-unstyled">
+                    {% for contact in cv.contacts.all %}
+                    <li>{{ contact.type }}: {{ contact.value }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
