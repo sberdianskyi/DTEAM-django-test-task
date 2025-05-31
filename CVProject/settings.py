@@ -41,7 +41,16 @@ INSTALLED_APPS = [
     "main",  # main app for CV management
     "crispy_forms",  # crispy forms support
     "crispy_bootstrap5",  # bootstrap5 template pack
+    "rest_framework",  # Django REST framework for API support
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
