@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "crispy_forms",  # crispy forms support
     "crispy_bootstrap5",  # bootstrap5 template pack
     "rest_framework",  # Django REST framework for API support
+    "drf_spectacular",  # for OpenAPI schema generation
 ]
 
 REST_FRAMEWORK = {
@@ -50,6 +51,13 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "CV API",
+    "DESCRIPTION": "API for managing CVs with skills, projects and contacts",
+    "VERSION": "1.0.0",
 }
 
 MIDDLEWARE = [
