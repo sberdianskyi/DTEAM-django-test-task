@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main",  # main app for CV management
-    "audit",  # app for auditing changes
+    "audit",  # app for auditing requests
     "crispy_forms",  # crispy forms support
     "crispy_bootstrap5",  # bootstrap5 template pack
     "rest_framework",  # Django REST framework for API support
@@ -69,6 +69,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "audit.middleware.RequestLoggingMiddleware",  # custom middleware for logging requests
 ]
 
 ROOT_URLCONF = "CVProject.urls"
