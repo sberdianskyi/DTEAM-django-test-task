@@ -1,5 +1,16 @@
 from django.views.generic import ListView, DetailView
+from django_weasyprint import WeasyTemplateResponseMixin
+from django_weasyprint.views import WeasyTemplateResponse
 from .models import CV
+
+
+class CVContextMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["skills"] = self.object.skills.all()
+        context["projects"] = self.object.projects.all()
+        context["contacts"] = self.object.contacts.all()
+        return context
 
 
 class CVListView(ListView):
@@ -12,14 +23,14 @@ class CVListView(ListView):
         return queryset
 
 
-class CVDetailView(DetailView):
+class CVDetailView(CVContextMixin, DetailView):
     model = CV
     template_name = "main/cv_detail.html"
     context_object_name = "cv"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["skills"] = self.object.skills.all()
-        context["projects"] = self.object.projects.all()
-        context["contacts"] = self.object.contacts.all()
-        return context
+
+class CVPDFView(WeasyTemplateResponseMixin, CVContextMixin, DetailView):
+    model = CV
+    template_name = "main/cv_pdf.html"
+    context_object_name = "cv"
+    pdf_filename = "cv.pdf"
