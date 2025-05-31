@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main",  # main app for CV management
+    "audit",  # app for auditing changes
     "crispy_forms",  # crispy forms support
     "crispy_bootstrap5",  # bootstrap5 template pack
     "rest_framework",  # Django REST framework for API support
