@@ -1,0 +1,59 @@
+[
+  {
+    "model": "main.cv",
+    "pk": 1,
+    "fields": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "bio": "Experienced software developer with a passion for building scalable web applications. Specializing in Python and Django development with 5 years of industry experience."
+    }
+  },
+  {
+    "model": "main.skill",
+    "pk": 1,
+    "fields": {
+      "cv": 1,
+      "name": "Python",
+      "level": "Expert"
+    }
+  },
+  {
+    "model": "main.skill",
+    "pk": 2,
+    "fields": {
+      "cv": 1,
+      "name": "Django",
+      "level": "Intermediate"
+    }
+  },
+  {
+    "model": "main.project",
+    "pk": 1,
+    "fields": {
+      "cv": 1,
+      "name": "E-commerce Platform",
+      "description": "Built a scalable e-commerce platform",
+      "technologies": "Python, Django, PostgreSQL",
+      "start_date": "2023-01-01",
+      "end_date": "2023-06-30"
+    }
+  },
+  {
+    "model": "main.contact",
+    "pk": 1,
+    "fields": {
+      "cv": 1,
+      "type": "Email",
+      "value": "john.doe@example.com"
+    }
+  },
+  {
+    "model": "main.contact",
+    "pk": 2,
+    "fields": {
+      "cv": 1,
+      "type": "LinkedIn",
+      "value": "linkedin.com/in/johndoe"
+    }
+  }
+]
