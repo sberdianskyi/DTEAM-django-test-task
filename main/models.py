@@ -7,7 +7,7 @@ class CV(models.Model):
     bio = models.TextField()
 
     class Meta:
-        ordering = ("-id",)
+        ordering = ("id",)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
