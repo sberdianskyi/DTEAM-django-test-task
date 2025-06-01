@@ -175,3 +175,25 @@ ASSETS_ROOT = "/static/assets"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+OPENAI_MODEL = os.environ.get("OPENAI_MODEL")
+AVAILABLE_LANGUAGES = [
+    ("cor", "Cornish"),
+    ("glv", "Manx"),
+    ("bre", "Breton"),
+    ("iku", "Inuktitut"),
+    ("kal", "Kalaallisut"),
+    ("rom", "Romani"),
+    ("oci", "Occitan"),
+    ("lad", "Ladino"),
+    ("sme", "Northern Sami"),
+    ("hsb", "Upper Sorbian"),
+    ("csb", "Kashubian"),
+    ("zza", "Zazaki"),
+    ("chv", "Chuvash"),
+    ("liv", "Livonian"),
+    ("tsd", "Tsakonian"),
+    ("srm", "Saramaccan"),
+    ("bis", "Bislama"),
+]
