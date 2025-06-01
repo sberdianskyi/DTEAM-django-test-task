@@ -10,3 +10,6 @@ python manage.py collectstatic --no-input
 
 # Apply any outstanding database migrations
 python manage.py migrate
+
+# To load the sample data into the project
+python manage.py loaddata sample_data.json
