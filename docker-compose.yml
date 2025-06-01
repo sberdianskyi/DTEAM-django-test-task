@@ -13,6 +13,7 @@ services:
            - .env
        depends_on:
            - db
+           - rabbitmq
 
        volumes:
            - ./:/app
@@ -26,6 +27,24 @@ services:
            - .env
        volumes:
            - my_db:$PGDATA
+
+   rabbitmq:
+       image: rabbitmq:3-management
+       ports:
+           - "5672:5672"
+           - "15672:15672"
+
+   celery:
+       build:
+           context: .
+       command: celery -A CVProject worker -l INFO
+       env_file:
+           - .env
+       depends_on:
+           - rabbitmq
+           - db
+       volumes:
+           - ./:/app
 
 volumes:
     my_db:
