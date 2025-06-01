@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}CV Project Settings{% endblock %}
+
+{% block content %}
+<h1>Settings</h1>
+<ul>
+    <li>DEBUG: {{ settings.DEBUG }}</li>
+    <li>ALLOWED_HOSTS: {{ settings.ALLOWED_HOSTS }}</li>
+    <li>DATABASES: {{ settings.DATABASES }}</li>
+</ul>
+{% endblock %}
