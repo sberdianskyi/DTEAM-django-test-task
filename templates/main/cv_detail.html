@@ -12,6 +12,13 @@
               <a href="{% url 'main:cv_pdf' cv.pk %}" class="btn btn-primary">
                 Download PDF
               </a>
+              <form id="sendPdfForm" method="post" action="{% url 'main:cv_send_pdf' cv.id %}" class="d-inline ms-2">
+                  {% csrf_token %}
+                  <div class="input-group">
+                      <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+                      <button type="submit" class="btn btn-success">Send PDF to Email</button>
+                  </div>
+              </form>
             </div>
             <div class="row">
                 <div class="col-md-8">
@@ -66,4 +73,19 @@
         </div>
     </div>
 </div>
+<script>
+document.getElementById("sendPdfForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    fetch(this.action, {
+        method: "POST",
+        body: new FormData(this),
+        headers: {
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+        }
+    })
+    .then(response => response.json())
+    .then(data => alert(data.message))
+    .catch(error => alert("Error sending PDF"));
+});
+</script>
 {% endblock %}
