@@ -10,7 +10,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN mkdir /app/tmp && chmod 777 /app/tmp
+RUN mkdir -p /app/tmp && chmod 777 /app/tmp
 
 RUN useradd -ms /bin/bash celeryuser
 USER celeryuser
