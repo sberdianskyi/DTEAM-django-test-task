@@ -12,6 +12,7 @@ from rest_framework import viewsets
 from .models import CV
 from .serializers import CVSerializer
 from .tasks import send_cv_pdf_task
+from .translation import translate_text
 
 
 class CVContextMixin:
@@ -77,6 +78,36 @@ class SendCVPDFView(CVPDFView):
 
         except Exception as e:
             return JsonResponse({"message": f"Error: {str(e)}"}, status=500)
+
+
+class TranslateCVView(CVContextMixin, generic.DetailView):
+    model = CV
+    template_name = "main/cv_detail.html"
+
+    def post(self, request, *args, **kwargs):
+        language = request.POST.get("language")
+        if not language:
+            return JsonResponse({"error": "Language is required"}, status=400)
+
+        self.object = self.get_object()
+
+        # Collecting the main text of the CV
+        text_to_translate = f"""
+    First Name: {self.object.first_name}
+    Last Name: {self.object.last_name}
+    Bio: {self.object.bio}
+    Projects:
+    """
+
+        # Adding information about projects
+        for project in self.object.projects.all():
+            text_to_translate += f"""
+    Project: {project.name}
+    Description: {project.description}
+    """
+
+        translated_text = translate_text(text_to_translate, language)
+        return JsonResponse({"translated_text": translated_text})
 
 
 @extend_schema(tags=["CVs"])
