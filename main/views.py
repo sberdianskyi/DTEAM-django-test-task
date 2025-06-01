@@ -1,10 +1,17 @@
+import os
+
+from django.conf import settings
 from django.views import generic
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
 from django_weasyprint import WeasyTemplateResponseMixin
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
 
 from .models import CV
 from .serializers import CVSerializer
+from .tasks import send_cv_pdf_task
 
 
 class CVContextMixin:
@@ -38,6 +45,38 @@ class CVPDFView(WeasyTemplateResponseMixin, CVContextMixin, generic.DetailView):
     template_name = "main/cv_pdf.html"
     context_object_name = "cv"
     pdf_filename = "cv.pdf"
+
+
+class SendCVPDFView(CVPDFView):
+    def get(self, request, *args, **kwargs):
+        return JsonResponse({"message": "Only POST method is allowed"}, status=405)
+
+    def post(self, request, *args, **kwargs):
+        email = request.POST.get("email")
+        if not email:
+            return JsonResponse({"message": "Email required."}, status=400)
+
+        try:
+            self.object = self.get_object()
+
+            filename = f"CV_{self.object.first_name}_{self.object.last_name}"
+
+            # Create a temporary directory in the project if it does not exist
+            temp_dir = os.path.join(settings.BASE_DIR, "tmp")
+            os.makedirs(temp_dir, exist_ok=True)
+            pdf_path = os.path.join(temp_dir, f"{filename}.pdf")
+
+            # Generating PDF
+            context = self.get_context_data()
+            html_string = render_to_string(self.template_name, context)
+            HTML(string=html_string).write_pdf(pdf_path)
+
+            # Sent task
+            send_cv_pdf_task.delay(email, pdf_path, filename)
+            return JsonResponse({"message": "PDF sent to email!"})
+
+        except Exception as e:
+            return JsonResponse({"message": f"Error: {str(e)}"}, status=500)
 
 
 @extend_schema(tags=["CVs"])
