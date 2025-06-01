@@ -2,18 +2,11 @@
 # Exit on error
 set -o errexit
 
-# Install Poetry
-curl -sSL https://install.python-poetry.org | python3 -
+# Modify this line as needed for your package manager (pip, poetry, etc.)
+pip install -r requirements.txt
 
-# Add Poetry to PATH
-export PATH="/root/.local/bin:$PATH"
-
-# Configure Poetry
-poetry config virtualenvs.create false
-
-# Install dependencies
-poetry install --no-interaction --no-ansi --no-root
-
-# Django commands
+# Convert static asset files
 python manage.py collectstatic --no-input
+
+# Apply any outstanding database migrations
 python manage.py migrate
