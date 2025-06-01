@@ -88,3 +88,7 @@ class CVViewSet(viewsets.ModelViewSet):
     @extend_schema(summary="Delete CV", description="Deletes a CV")
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
+
+
+class SettingsView(generic.TemplateView):
+    template_name = "main/settings.html"
