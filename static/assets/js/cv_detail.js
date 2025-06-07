@@ -9,8 +9,22 @@ function initializeCVDetail(cvId, csrfToken) {
             }
         })
         .then(response => response.json())
-        .then(data => alert(data.message))
-        .catch(error => alert("Error sending PDF"));
+        .then(data => {
+            Swal.fire({
+                title: 'Success!',
+                text: data.message,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Error sending PDF',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
     });
 
     document.getElementById('translateBtn').addEventListener('click', function() {
