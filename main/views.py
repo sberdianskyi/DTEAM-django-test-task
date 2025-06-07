@@ -72,15 +72,11 @@ class SendCVPDFView(CVPDFView):
                 args=[email, pdf_content_base64, filename],
             )
 
-            try:
-                result = task.get(timeout=30)
-                if result:
-                    return JsonResponse({"message": "PDF sent to email!"})
-                return JsonResponse({"message": "Failed to send email"}, status=500)
-            except Exception as e:
-                return JsonResponse(
-                    {"message": f"Failed to send email: {str(e)}"}, status=500
-                )
+            result = task.get(timeout=30)
+            return JsonResponse(
+                {"message": "PDF sent to email!" if result else "Failed to send email"},
+                status=200 if result else 500,
+            )
 
         except Exception as e:
             return JsonResponse({"message": f"Error: {str(e)}"}, status=500)
