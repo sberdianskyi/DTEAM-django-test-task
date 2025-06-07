@@ -13,7 +13,7 @@ services:
            - .env
        depends_on:
            - db
-           - rabbitmq
+           - redis
 
        volumes:
            - ./:/app
@@ -28,11 +28,10 @@ services:
        volumes:
            - my_db:$PGDATA
 
-   rabbitmq:
-       image: rabbitmq:3-management
+   redis:
+       image: redis:7-alpine
        ports:
-           - "5672:5672"
-           - "15672:15672"
+           - "6379:6379"
 
    celery:
        build:
@@ -41,7 +40,7 @@ services:
        env_file:
            - .env
        depends_on:
-           - rabbitmq
+           - redis
            - db
        volumes:
            - ./:/app

@@ -1,5 +1,5 @@
 FROM python:3.12.10-bookworm
-LABEL maintainer="sberdianskyigmail.com"
+LABEL maintainer="sberdianskyi@gmail.com"
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app

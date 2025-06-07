@@ -49,6 +49,7 @@ pyphen==0.17.2
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
 PyYAML==6.0.2
+redis==6.2.0
 referencing==0.36.2
 rpds-py==0.25.1
 six==1.17.0

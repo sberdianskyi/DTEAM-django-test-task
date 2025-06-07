@@ -13,3 +13,6 @@ python manage.py migrate
 
 # To load the sample data into the project
 python manage.py loaddata sample_data.json
+
+# Run Celery worker in the background
+celery -A CVProject worker --loglevel=info &
