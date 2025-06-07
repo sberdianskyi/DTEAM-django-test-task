@@ -15,6 +15,7 @@ A Django-based web application for managing CVs with skills, projects, and conta
 ### Prerequisites
 * Python 3.11+
 * PostgreSQL
+* Redis
 * Poetry
 * pyenv (recommended for Python version management)
 
@@ -37,23 +38,12 @@ pyenv local 3.12.10
 poetry install
 ```
 
-3. Create .env file in the root directory with:
-* DEBUG=True
-* DJANGO_SECRET_KEY=your-secret-key
-* POSTGRES_DB=your-db-name
-* POSTGRES_USER=your-db-user
-* POSTGRES_PASSWORD=your-db-password
-* POSTGRES_HOST=localhost
-* POSTGRES_PORT=5432
-* EMAIL_HOST=smtp.gmail.com
-* EMAIL_PORT=587
-* EMAIL_USE_TLS=True
-* EMAIL_HOST_USER=your-email@gmail.com
-* EMAIL_HOST_PASSWORD=your-app-password
-* DEFAULT_FROM_EMAIL=your-email@gmail.com
+3. Create .env file in the root directory - for this user .env_example file.
+
 
 4. Apply migrations and load sample data:
 ```shell
+poetry run python manage.py makemigrations
 poetry run python manage.py migrate
 poetry run python manage.py loaddata sample_data.json
 ```
@@ -63,6 +53,28 @@ poetry run python manage.py loaddata sample_data.json
 poetry run python manage.py runserver
 ```
 6. Access the application at `http://localhost:8000`.
+
+7. Install and start Redis (required for Celery):
+   * On Windows:
+     ```shell
+     # Install Redis on Windows Subsystem for Linux (WSL) or
+     # Download and install Redis for Windows
+     ```
+   * On macOS:
+     ```shell
+     brew install redis
+     brew services start redis
+     ```
+   * On Linux:
+     ```shell
+     sudo apt-get install redis-server
+     sudo service redis-server start
+     ```
+
+8. Start Celery worker (in a separate terminal):
+```shell
+poetry run celery -A CVProject worker -l INFO
+```
 
 ### Testing
 The project uses Django's testing framework. To run tests:
