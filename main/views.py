@@ -1,4 +1,5 @@
 import os
+import time
 
 from django.conf import settings
 from django.views import generic
@@ -72,12 +73,17 @@ class SendCVPDFView(CVPDFView):
             html_string = render_to_string(self.template_name, context)
             HTML(string=html_string).write_pdf(pdf_path)
 
-            if os.path.exists(pdf_path):
-                # Send email task
-                task = send_cv_pdf_task.delay(email, pdf_path, filename)
-                return JsonResponse({"message": "PDF sent to email!"})
-            else:
-                return JsonResponse({"message": "Failed to generate PDF"}, status=500)
+            time.sleep(1)
+
+            max_attempts = 3
+            for attempt in range(max_attempts):
+                if os.path.exists(pdf_path):
+                    # Send email task
+                    task = send_cv_pdf_task.delay(email, pdf_path, filename)
+                    return JsonResponse({"message": "PDF sent to email!"})
+                time.sleep(1)
+
+            return JsonResponse({"message": "Failed to generate PDF"}, status=500)
 
         except Exception as e:
             return JsonResponse({"message": f"Error: {str(e)}"}, status=500)
