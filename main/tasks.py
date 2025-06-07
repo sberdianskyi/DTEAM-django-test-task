@@ -1,5 +1,6 @@
 import os
 import logging
+import time
 
 from celery import shared_task
 from django.core.mail import EmailMessage
@@ -11,6 +12,21 @@ logger = logging.getLogger(__name__)
 @shared_task
 def send_cv_pdf_task(email, pdf_file_path, cv_name):
     try:
+        max_attempts = 10
+        for attempt in range(max_attempts):
+            if os.path.exists(pdf_file_path) and os.path.getsize(pdf_file_path) > 0:
+                try:
+                    with open(pdf_file_path, "rb") as f:
+                        if f.read(4).startswith(b"%PDF"):
+                            break
+                except IOError:
+                    pass
+            time.sleep(1)
+            logger.info(f"Waiting for PDF file, attempt {attempt + 1}")
+        else:
+            raise FileNotFoundError(
+                f"PDF file not found or invalid after {max_attempts} attempts"
+            )
         # This task sends the CV PDF to the specified email address.
         logger.info(f"Starting email task for {email} with CV: {cv_name}")
         subject = f"Your CV: {cv_name}"
@@ -26,16 +42,18 @@ def send_cv_pdf_task(email, pdf_file_path, cv_name):
         logger.info(f"PDF path: {pdf_file_path}")
         logger.info(f"File exists: {os.path.exists(pdf_file_path)}")
 
-        if os.path.exists(pdf_file_path):
-            with open(pdf_file_path, "rb") as f:
-                email.attach(f"{cv_name}.pdf", f.read(), "application/pdf")
-                logger.info(f"PDF file attached successfully")
+
+        with open(pdf_file_path, "rb") as f:
+            email.attach(f"{cv_name}.pdf", f.read(), "application/pdf")
+            logger.info(f"PDF file attached successfully")
 
         email.send(fail_silently=False)
         logger.info(f"Email sent successfully to {email}")
 
         if os.path.exists(pdf_file_path):
             os.remove(pdf_file_path)
+
+        return True
 
     except Exception as e:
         logger.error(f"Error sending email: {str(e)}")
