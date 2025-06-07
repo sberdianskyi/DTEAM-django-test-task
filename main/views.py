@@ -1,7 +1,5 @@
-import os
-import time
+import base64
 
-from django.conf import settings
 from django.views import generic
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -60,34 +58,29 @@ class SendCVPDFView(CVPDFView):
 
         try:
             self.object = self.get_object()
-
             filename = f"CV_{self.object.first_name}_{self.object.last_name}"
-
-            # Create a temporary directory in the project if it does not exist
-            temp_dir = os.path.join(settings.BASE_DIR, "tmp")
-            os.makedirs(temp_dir, exist_ok=True)
-            pdf_path = os.path.join(temp_dir, f"{filename}.pdf")
 
             # Generating PDF
             context = self.get_context_data()
             html_string = render_to_string(self.template_name, context)
-            HTML(string=html_string).write_pdf(pdf_path)
+            pdf_content = HTML(string=html_string).write_pdf()
+
+            # Convert PDF to base64
+            pdf_content_base64 = base64.b64encode(pdf_content).decode("utf-8")
 
             task = send_cv_pdf_task.apply_async(
-                args=[email, pdf_path, filename],
-                countdown=3,
+                args=[email, pdf_content_base64, filename],
             )
 
             try:
-                result = task.get(timeout=30)  # Ждём не более 30 секунд
+                result = task.get(timeout=30)
                 if result:
                     return JsonResponse({"message": "PDF sent to email!"})
+                return JsonResponse({"message": "Failed to send email"}, status=500)
             except Exception as e:
                 return JsonResponse(
                     {"message": f"Failed to send email: {str(e)}"}, status=500
                 )
-
-            return JsonResponse({"message": "Failed to send email"}, status=500)
 
         except Exception as e:
             return JsonResponse({"message": f"Error: {str(e)}"}, status=500)
