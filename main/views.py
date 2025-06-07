@@ -73,15 +73,20 @@ class SendCVPDFView(CVPDFView):
             html_string = render_to_string(self.template_name, context)
             HTML(string=html_string).write_pdf(pdf_path)
 
-            time.sleep(1)
+            time.sleep(2)
 
             max_attempts = 3
             for attempt in range(max_attempts):
-                if os.path.exists(pdf_path):
-                    # Send email task
-                    task = send_cv_pdf_task.delay(email, pdf_path, filename)
-                    return JsonResponse({"message": "PDF sent to email!"})
-                time.sleep(1)
+                if os.path.exists(pdf_path) and os.path.getsize(pdf_path) > 0:
+                    try:
+                        with open(pdf_path, "rb") as f:
+                            if f.read(4).startswith(b"%PDF"):
+                                # Send email task
+                                task = send_cv_pdf_task.delay(email, pdf_path, filename)
+                                return JsonResponse({"message": "PDF sent to email!"})
+                    except IOError:
+                        pass
+                time.sleep(2)
 
             return JsonResponse({"message": "Failed to generate PDF"}, status=500)
 
